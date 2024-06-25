@@ -20,4 +20,10 @@ describe('stringCalculator', () => {
   test('should handle newlines as separators', () => {
     expect(add('1\n2,3')).toBe(6);
   });
+
+  test('should throw an error for invalid input like "2,\n3"', () => {
+    expect(() => {
+      add('2,\n3');
+    }).toThrow('Invalid input: consecutive separators');
+  });
 });
