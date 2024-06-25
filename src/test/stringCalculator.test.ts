@@ -32,4 +32,10 @@ describe('stringCalculator', () => {
       add('1,2,');
     }).toThrow('Invalid input: separator at the end');
   });
+
+  test('should handle different delimiters', () => {
+    expect(add('//;\n1;3')).toBe(4);
+    expect(add('//|\n1|2|3')).toBe(6);
+    expect(add('//sep\n2sep5')).toBe(7);
+  });
 });
