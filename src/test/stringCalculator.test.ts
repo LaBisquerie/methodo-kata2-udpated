@@ -12,4 +12,8 @@ describe('stringCalculator', () => {
   test('should return the sum of two numbers', () => {
     expect(add('1,2')).toBe(3);
   });
+
+  test('should handle an unknown number of arguments', () => {
+    expect(add('1,2,3,4,5')).toBe(15);
+  });
 });
