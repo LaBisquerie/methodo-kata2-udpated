@@ -2,9 +2,9 @@ export function add(numbers: string): number {
   if (numbers === '') {
     return 0;
   }
-  if (!numbers.includes(',')) {
+  const numArray = numbers.split(',');
+  if (numArray.length === 1) {
     return parseInt(numbers);
   }
-
-  return 0;
+  return numArray.reduce((sum, num) => sum + parseInt(num), 0);
 }
