@@ -26,4 +26,10 @@ describe('stringCalculator', () => {
       add('2,\n3');
     }).toThrow('Invalid input: consecutive separators');
   });
+
+  test('should throw an error for input ending with a separator', () => {
+    expect(() => {
+      add('1,2,');
+    }).toThrow('Invalid input: separator at the end');
+  });
 });
