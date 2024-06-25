@@ -38,4 +38,10 @@ describe('stringCalculator', () => {
     expect(add('//|\n1|2|3')).toBe(6);
     expect(add('//sep\n2sep5')).toBe(7);
   });
+
+  test('should throw an error for invalid input with different delimiter', () => {
+    expect(() => {
+      add('//|\n1|2,3');
+    }).toThrow("'|' expected but ',' found at position 3.");
+  });
 });
