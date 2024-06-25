@@ -7,11 +7,24 @@ export function add(numbers: string): number {
     throw new Error('Invalid input: separator at the end');
   }
 
+  let delimiters = /,|\n/;
+
+  if (numbers.startsWith('//')) {
+    const delimiterEndIndex = numbers.indexOf('\n');
+    const delimiterString = numbers.substring(2, delimiterEndIndex);
+    delimiters = new RegExp(delimiterString.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
+    numbers = numbers.substring(delimiterEndIndex + 1);
+  }
+
   if (/,\n|\n,/.test(numbers)) {
     throw new Error('Invalid input: consecutive separators');
   }
 
-  const numArray = numbers.split(/[\n,]/);
+  const numArray = numbers.split(delimiters).map(Number);
 
-  return numArray.reduce((sum, num) => sum + parseInt(num), 0);
+  if (numArray.some(isNaN)) {
+    throw new Error('Invalid input: contains NaN');
+  }
+
+  return numArray.reduce((sum, num) => sum + num, 0);
 }
